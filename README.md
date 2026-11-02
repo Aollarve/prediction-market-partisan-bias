@@ -1,6 +1,6 @@
 # Replication Repository: Do Modern Prediction Markets Have a Right-Wing Tilt? (2012–2026)
 
-This repository contains the race-level dataset, 2026 midterm market snapshots ($T-14$ and $T-7$), and zero-dependency Python replication scripts for the empirical research on partisan bias in political prediction markets across **$455$ verified U.S. elections (2012–April 2026)** and the **2026 U.S. Midterm Forecasts**.
+This repository contains the race-level dataset, 2026 midterm market snapshots ($T-14$, October 27 $T-7$, and November 2 $T-1$), and zero-dependency Python replication scripts for the empirical research on partisan bias in political prediction markets across **$455$ verified U.S. elections (2012–April 2026)** and the **2026 U.S. Midterm Forecasts**.
 
 ---
 
@@ -8,12 +8,13 @@ This repository contains the race-level dataset, 2026 midterm market snapshots (
 
 | File | Description |
 | :--- | :--- |
-| `prediction_market_partisan_bias_paper.md` | Full text of the empirical paper, including all tables, plain-English equations, and 2026 midterm log-odds forecasts. |
+| `paper1_prediction_market_partisan_bias.md` | **Paper 1 (Historical & Horizon Study):** Empirical analysis of partisan pricing bias across $455$ verified U.S. elections (2012–April 2026), including the price-controlled wrong-call test, Pre-*Dobbs* vs. Post-*Dobbs* falsification, State Redness $\times$ Incumbency decomposition, and pre-election drift across $T-30$, $T-14$, $T-7$, and $T-1$. |
+| `paper2_2026_midterm_forecasts.md` | **Paper 2 (2026 Midterm Application):** Poll-conditioned log-odds de-biasing forecasts for the November 3, 2026 U.S. Midterm Elections ($T-14$, October 27 $T-7$, and November 2 $T-1$) across the U.S. Senate, Governors, and U.S. House. |
 | `verified_election_markets_2012_2026.csv` | Race-by-race dataset of **455 unique, named U.S. general, runoff, recall, and special elections (2012–April 2026)** across 28 verified columns. |
-| `midterm_2026_battlegrounds.csv` | Tabular CSV of the 13 core 2026 U.S. Senate and Governor battlegrounds at $T-14$ (Oct 20) and $T-7$ (Oct 27), including polling averages, trader markups, redness/incumbency/fortress credits, and poll-conditioned log-odds forecasts. |
-| `midterm_2026_t7_results.json` | Complete JSON archive of the 2026 $T-14$ and $T-7$ snapshots across all 13 battlegrounds and 3 chambers (Senate, Governors, U.S. House). |
-| `replicate_paper_tables.py` | **Primary replication script:** reads `verified_election_markets_2012_2026.csv` and `midterm_2026_t7_results.json` directly from disk and reproduces every table, $p$-value, decomposition, and price-controlled wrong-call regression in the paper. |
-| `run_t7_analysis.py` | Reproduces the 2026 $T-14$ and $T-7$ log-odds poll-conditioned de-biasing calculations and regenerates `midterm_2026_t7_results.json` and `midterm_2026_battlegrounds.csv`. |
+| `midterm_2026_battlegrounds.csv` | Tabular CSV of the 13 core 2026 U.S. Senate and Governor battlegrounds across $T-14$ (Oct 20), $T-7$ (Oct 27), and $T-1$ (Nov 2), including polling averages, trader markups, redness/incumbency/fortress credits, and poll-conditioned log-odds forecasts. |
+| `midterm_2026_t7_results.json` | Complete JSON archive of the 2026 $T-14$, $T-7$, and $T-1$ snapshots across all 13 battlegrounds and 3 chambers (Senate, Governors, U.S. House). |
+| `replicate_paper_tables.py` | **Primary replication script:** reads `verified_election_markets_2012_2026.csv` and `midterm_2026_t7_results.json` directly from disk and reproduces every table, $p$-value, decomposition, and price-controlled wrong-call regression across both papers. |
+| `run_t7_analysis.py` | Reproduces the 2026 $T-14$, $T-7$, and $T-1$ log-odds poll-conditioned de-biasing calculations and regenerates `midterm_2026_t7_results.json` and `midterm_2026_battlegrounds.csv`. |
 | `build_verified_dataset.py` | Dataset assembly script that compiles the 455 race-level records, computes the normal-CDF poll win probabilities and Brier scores, writes `verified_election_markets_2012_2026.csv`, and prints the full statistical output. |
 
 ---
@@ -26,7 +27,7 @@ All scripts run on **Python 3.9+** using only the Python standard library (`csv`
 # 1. Verify all historical tables and price-controlled regressions directly from the CSV:
 python3 replicate_paper_tables.py
 
-# 2. Verify the 2026 T-14 and T-7 log-odds battleground and chamber forecasts:
+# 2. Verify the 2026 T-14, T-7, and T-1 log-odds battleground and chamber forecasts:
 python3 run_t7_analysis.py
 ```
 
