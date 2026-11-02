@@ -207,11 +207,18 @@ def main():
 
     with open("midterm_2026_t7_results.json") as f:
         m26 = json.load(f)
-    print("\n=== 2026 T-7 SNAPSHOT SUMMARY ===")
-    print("Senate Control (T-14 -> T-7):", m26["senate_control_kalshi_t14"], "->", m26["senate_control_kalshi_t7"])
-    print("Senate Preferred T-7:", m26["chambers"]["senate"]["t7_preferred"])
-    print("Gov Preferred T-7:   ", m26["chambers"]["governors"]["t7_preferred"])
-    print("House Preferred T-7: ", m26["chambers"]["house"]["t7_preferred"])
+    print("\n=== 2026 PRE-ELECTION SNAPSHOT SUMMARY (T-14 -> T-7 -> T-1) ===")
+    print(
+        "Senate Control (T-14 -> T-7 -> T-1):",
+        m26["senate_control_kalshi_t14"],
+        "->",
+        m26["senate_control_kalshi_t7"],
+        "->",
+        m26["senate_control_kalshi_t1"],
+    )
+    print("Senate Preferred (T-7 -> T-1):", m26["chambers"]["senate"]["t7_preferred"], "->", m26["chambers"]["senate"]["t1_preferred"])
+    print("Gov Preferred    (T-7 -> T-1):", m26["chambers"]["governors"]["t7_preferred"], "->", m26["chambers"]["governors"]["t1_preferred"])
+    print("House Preferred  (T-7 -> T-1):", m26["chambers"]["house"]["t7_preferred"], "->", m26["chambers"]["house"]["t1_preferred"])
 
 
 if __name__ == "__main__":
