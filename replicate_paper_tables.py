@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 """
 Standalone Replication Script for:
-"Do Modern Prediction Markets Have a Right-Wing Tilt? Testing 455 Verified U.S. Elections (2012-2026)
- and 2026 Midterm Forecasts Through T-7"
+"Partisan Pricing Bias in U.S. Political Prediction Markets: Empirical Evidence Across 455 Elections (2012-2026)"
+(`partisan_pricing_bias_in_us_political_prediction_markets.md`) and `supplemental_tables.md`.
+
+Author: Andres Ollarvez
 
 This script reads `verified_election_markets_2012_2026.csv` and `midterm_2026_t7_results.json`
 directly from disk (using only the Python standard library) and reproduces every table,
-decomposition, price-controlled wrong-call regression, and 2026 log-odds forecast in the paper.
+exact Student-t p-value, decomposition, price-controlled wrong-call regression, Brier
+calibration score, and locked 2026 pre-election forecast summary.
 """
 
 import csv
@@ -22,14 +25,22 @@ def norm_cdf(x: float) -> float:
 
 def t_pval_exact(t_stat: float, df: int) -> float:
     x = abs(t_stat)
-    if df <= 0:
+    if df <= 0 or x == 0.0:
         return 1.0
-    if df == 1:
-        return 1.0 - (2.0 / math.pi) * math.atan(x)
-    if df == 2:
-        return 1.0 - (x / math.sqrt(2.0 + x * x))
-    z = math.sqrt(df * math.log(1.0 + (x * x) / df)) * (1.0 - 1.0 / (4.0 * df))
-    return 2.0 * (1.0 - norm_cdf(z))
+    phi0 = math.atan(math.sqrt(df) / x)
+    n_steps = 400
+    h = phi0 / n_steps
+    log_pref = math.log(2.0) + math.lgamma(0.5 * (df + 1.0)) - 0.5 * math.log(math.pi) - math.lgamma(0.5 * df)
+
+    def f(phi: float) -> float:
+        if phi <= 0.0:
+            return math.exp(log_pref) if df == 1 else 0.0
+        return math.exp(log_pref + (df - 1.0) * math.log(math.sin(phi)))
+
+    acc = f(0.0) + f(phi0)
+    for i in range(1, n_steps):
+        acc += (4.0 if i % 2 == 1 else 2.0) * f(i * h)
+    return min(1.0, max(0.0, acc * h / 3.0))
 
 
 def ols_fit(y, X):
@@ -108,6 +119,8 @@ def summarize_cohort(name, rows):
     avg_poll = mean(r["poll_win_prob_r_55sd"] for r in rows)
     biases = [r["net_market_bias_pp"] for r in rows]
     markups = [r["trader_markup_pp"] for r in rows]
+    brier_m = mean(r["brier_mkt"] for r in rows)
+    brier_p = mean(r["brier_poll"] for r in rows)
     clusters = [r["election_date"] for r in rows]
 
     se_race = stdev(biases) / math.sqrt(n) if n > 1 else 0.0
@@ -125,7 +138,7 @@ def summarize_cohort(name, rows):
         t_c = mean(biases) / se_c
         p_c = t_pval_exact(t_c, G - 1)
     else:
-        p_c = p_race
+        p_c = None
 
     gop_favs = [r for r in rows if r["gop_fav"] == 1]
     dem_favs = [r for r in rows if r["gop_fav"] == 0]
@@ -142,7 +155,9 @@ def summarize_cohort(name, rows):
         "net_bias_pp": round(mean(biases), 2),
         "poll_bias_pp": round(avg_poll - avg_win, 2),
         "trader_markup_pp": round(mean(markups), 2),
-        "p_clustered": round(p_c, 4),
+        "brier_mkt": round(brier_m, 4),
+        "brier_poll": round(brier_p, 4),
+        "p_clustered": round(p_c, 4) if p_c is not None else None,
         "p_race_level": round(p_race, 4),
         "gop_fav_n": len(gop_favs),
         "gop_upsets": gop_upsets,
@@ -159,8 +174,9 @@ def main():
     records = load_dataset()
     print(f"Loaded {len(records)} verified elections (2012-2026).")
 
-    # Table 1 & Table 2 Cohorts
+    # Table 1, Table 2 & Table 6 Cohorts
     cohorts = [
+        ("All 455 Verified Elections (2012-2026)", records),
         ("Table 1 Row 1: Pre-2016 Control (2012-14)", [r for r in records if r["era"] == "Pre2016"]),
         ("Table 1 Row 2: All Modern (2016-2026)", [r for r in records if r["era"] == "Modern"]),
         ("Table 1 Row 3: Pres Top-of-Ticket (16/20/24)", [r for r in records if r["cycle_group"] == "Pres_Top"]),
@@ -177,14 +193,15 @@ def main():
         ("Table 2 Row 5: Post-Dobbs Non-Pres (Jul 22-26)", [r for r in records if r["cycle_group"] in ("Midterm_2022", "Special_PostDobbs")]),
     ]
 
-    print("\n=== TABLES 1 & 2: COHORT BREAKDOWN ===")
+    print("\n=== TABLES 1, 2 & 6: COHORT BIAS, MARKUP, UPSETS & BRIER CALIBRATION ===")
     for name, rows in cohorts:
         s = summarize_cohort(name, rows)
+        pcl_str = f"{s['p_clustered']:.4f}" if s["p_clustered"] is not None else "  N/A "
         print(
             f"{s['name']:48s} | N={s['n']:3d} (G={s['dates']:2d}) | Mkt={s['avg_mkt_r']:5.1f}% Win={s['actual_gop_win']:5.1f}% | "
-            f"Bias={s['net_bias_pp']:+6.2f}pp (p_cl={s['p_clustered']:.4f}, p_rc={s['p_race_level']:.4f}) | "
+            f"Bias={s['net_bias_pp']:+6.2f}pp (p_cl={pcl_str}, p_rc={s['p_race_level']:.4f}) | "
             f"Markup={s['trader_markup_pp']:+6.2f}pp | GOP_Upset={s['gop_upsets']}/{s['gop_fav_n']} ({s['gop_upset_rate']:4.1f}%) vs "
-            f"Dem={s['dem_upsets']}/{s['dem_fav_n']} ({s['dem_upset_rate']:4.1f}%) | Share={s['wrong_calls_pro_gop_pct']:5.1f}%"
+            f"Dem={s['dem_upsets']}/{s['dem_fav_n']} ({s['dem_upset_rate']:4.1f}%) | Brier={s['brier_mkt']:.4f} vs {s['brier_poll']:.4f}"
         )
 
     nonpres = [r for r in records if r["cycle_group"] in ("Midterm_2018", "Midterm_2022", "Special_PreDobbs", "Special_PostDobbs")]
@@ -204,6 +221,82 @@ def main():
     print("\n=== PRICE-CONTROLLED WRONG-CALL REGRESSIONS ===")
     print(f"All Non-Pres Favorites (N={len(nonpres)}): Excess GOP Upset = {b_all[1]:+.2f} pp (SE={se_all[1]:.2f}, t={t_all:.2f})")
     print(f"Clear Favorites >=55c  (N={len(clear)}): Excess GOP Upset = {b_clr[1]:+.2f} pp (SE={se_clr[1]:.2f}, t={t_clr:.2f})")
+
+    # Table 3, S3, S4 & Structural Regressions
+    print("\n=== TABLE 3 & S3: STATE REDNESS & SEAT INCUMBENCY (N=225) ===")
+    struct_groups = [
+        ("1. Red States (>=65% GOP)", [r for r in nonpres if r["redness_tier"] == "Red_State"]),
+        ("2. Purple States (35-65%)", [r for r in nonpres if r["redness_tier"] == "Purple_State"]),
+        ("3. Blue States (<=35% GOP)", [r for r in nonpres if r["redness_tier"] == "Blue_State"]),
+        ("4. GOP-Held Seat (All)", [r for r in nonpres if r["seat_status"] in ("Elected_R_Inc", "Open_Appt_R")]),
+        ("4a. Elected GOP Incumbent", [r for r in nonpres if r["seat_status"] == "Elected_R_Inc"]),
+        ("4b. Open / Appt. GOP Seat", [r for r in nonpres if r["seat_status"] == "Open_Appt_R"]),
+        ("5. Dem-Held Seat", [r for r in nonpres if r["seat_status"] == "Dem_Seat"]),
+    ]
+    for sname, srows in struct_groups:
+        s = summarize_cohort(sname, srows)
+        print(
+            f"{s['name']:28s} | N={s['n']:3d} | Win={s['actual_gop_win']:5.1f}% | "
+            f"PollBias={s['poll_bias_pp']:+6.2f}pp | Markup={s['trader_markup_pp']:+6.2f}pp | "
+            f"TotalBias={s['net_bias_pp']:+6.2f}pp (p_rc={s['p_race_level']:.4f}) | GOP_Upset={s['gop_upsets']}/{s['gop_fav_n']} ({s['gop_upset_rate']:4.1f}%)"
+        )
+
+    y_win = [float(r["gop_win"]) for r in nonpres]
+    X_red = [[1.0, 1.0 if r["redness_tier"] == "Red_State" else 0.0, 1.0 if r["redness_tier"] == "Purple_State" else 0.0] for r in nonpres]
+    X_inc = [[1.0, 1.0 if r["seat_status"] == "Elected_R_Inc" else 0.0, 1.0 if r["seat_status"] == "Open_Appt_R" else 0.0] for r in nonpres]
+    _, _, r2_red = ols_fit(y_win, X_red)
+    _, _, r2_inc = ols_fit(y_win, X_inc)
+    y_bias = [r["net_market_bias_pp"] for r in nonpres]
+    X_demo = [
+        [
+            1.0,
+            float(r["diverse_or_female_dem"]),
+            1.0 if r["redness_tier"] == "Red_State" else 0.0,
+            1.0 if r["redness_tier"] == "Purple_State" else 0.0,
+            1.0 if r["seat_status"] == "Elected_R_Inc" else 0.0,
+            1.0 if r["seat_status"] == "Open_Appt_R" else 0.0,
+        ]
+        for r in nonpres
+    ]
+    b_dem, se_dem, _ = ols_fit(y_bias, X_demo)
+    t_dem = b_dem[1] / se_dem[1]
+    p_dem = t_pval_exact(t_dem, len(nonpres) - len(X_demo[0]))
+    print(f"Actual Win R^2: Redness Tiers = {r2_red:.3f}, Incumbency Tiers = {r2_inc:.3f}")
+    print(f"Demographic Control Coef (N=225): {b_dem[1]:+.2f} pp (SE={se_dem[1]:.2f}, t={t_dem:.2f}, p={p_dem:.4f})")
+
+    # Table 4 & Table 5
+    print("\n=== TABLE 4: PLATFORMS (NON-PRESIDENTIAL & KALSHI VERIFIED) ===")
+    plat_groups = [
+        ("PredictIt Non-Pres (2017-24)", [r for r in nonpres if "PredictIt" in r["platforms"]]),
+        ("Polymarket Non-Pres (2021-26)", [r for r in nonpres if "Polymarket" in r["platforms"]]),
+        ("Kalshi Non-Pres Specials (24-26)", [r for r in nonpres if "Kalshi" in r["platforms"]]),
+        ("Kalshi All Down-Ballot (24-26)", [r for r in records if "Kalshi" in r["platforms"] and r["office"] != "Pres"]),
+        ("Kalshi All Verified (Oct 24-26)", [r for r in records if "Kalshi" in r["platforms"]]),
+    ]
+    for pname, prows in plat_groups:
+        s = summarize_cohort(pname, prows)
+        print(
+            f"{s['name']:32s} | N={s['n']:3d} | Mkt={s['avg_mkt_r']:5.1f}% Win={s['actual_gop_win']:5.1f}% | "
+            f"Markup={s['trader_markup_pp']:+6.2f}pp | Bias={s['net_bias_pp']:+6.2f}pp (p_rc={s['p_race_level']:.4f}) | "
+            f"Upsets={s['gop_upset_rate']:4.1f}% vs {s['dem_upset_rate']:4.1f}%"
+        )
+
+    print("\n=== TABLE 5: 4 MARKET PROBABILITY TIERS (N=225) ===")
+    for tlabel, trows in [
+        ("1. Toss-Up (45%-55%)", [r for r in nonpres if r["market_tier"] == "1_TossUp_45_55"]),
+        ("2. Lean (55%-65%)", [r for r in nonpres if r["market_tier"] == "2_Lean_55_65"]),
+        ("3. Likely (65%-85%)", [r for r in nonpres if r["market_tier"] == "3_Likely_65_85"]),
+        ("4. Safe / Solid (>85%)", [r for r in nonpres if r["market_tier"] == "4_Safe_gt85"]),
+        ("Excl. Toss-Ups (>=55%)", clear),
+    ]:
+        s = summarize_cohort(tlabel, trows)
+        print(
+            f"{s['name']:24s} | N={s['n']:3d} ({s['gop_fav_n']}R/{s['dem_fav_n']}D) | "
+            f"GOP_Upset={s['gop_upsets']}/{s['gop_fav_n']} ({s['gop_upset_rate']:4.1f}%) | "
+            f"Dem_Upset={s['dem_upsets']}/{s['dem_fav_n']} ({s['dem_upset_rate']:4.1f}%) | "
+            f"Bias={s['net_bias_pp']:+6.2f}pp (Markup={s['trader_markup_pp']:+6.2f}pp, p={s['p_race_level']:.4f}) | "
+            f"Brier={s['brier_mkt']:.4f} vs {s['brier_poll']:.4f}"
+        )
 
     with open("midterm_2026_t7_results.json") as f:
         m26 = json.load(f)

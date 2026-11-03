@@ -14,14 +14,14 @@ Key methodological features:
      Evaluated across competitive Kalshi/Polymarket district contracts using district Cook PVI and incumbency credits.
 2. Tracks all 13 statewide battlegrounds (9 Senate + 4 Governor) across T-14, T-7 (Oct 27), and T-1 (Nov 2).
 3. Certified 2006-2025 (20-year) statewide Senate + Governor GOP win shares and 2025/2026 Cook PVIs:
-   - NC: R+3, 41.7% (5/12)  | ME: D+2, 45.5% (5/11)  | MI: R+1, 16.7% (2/12)
-   - OH: R+6, 66.7% (8/12)  | AK: R+6, 81.8% (9/11)  | TX: R+5, 100.0% (11/11)
-   - IA: R+6, 72.7% (8/11)  | KS: R+10, 72.7% (8/11) | NE: R+13, 100.0% (12/12)
-   - GA: R+3, 75.0% (9/12)  | NV: R+1, 45.5% (5/11)  | VT: D+17, 41.2% (7/17)
+   - NC: R+3, 54.5% (6/11)  | ME: D+2, 50.0% (6/12)  | MI: R+1, 16.7% (2/12)
+   - OH: R+6, 66.7% (8/12)  | AK: R+6, 81.8% (9/11)  | TX: R+5, 100.0% (12/12)
+   - IA: R+6, 81.8% (9/11)  | KS: R+10, 72.7% (8/11) | NE: R+13, 92.3% (12/13)
+   - GA: R+3, 75.0% (9/12)  | NV: R+1, 50.0% (6/12)  | VT: D+17, 41.2% (7/17)
 4. Bounded Log-Odds (Logit) De-Biasing Conditioned on the Market-vs-Poll Gap + Separated Fortress Credits,
    with 45%-55% Toss-Ups left strictly uncalled (No Call).
-   Note: All T-14 and T-7 parameters and outputs remain locked at their pre-T-1 values; T-1 applies the exact
-   same frozen specification to live November 2, 2026 market prices and final polling averages.
+   Note: All T-14 and T-7 parameters and outputs use the frozen pre-election specification; T-1 applies the exact
+   same specification to November 2, 2026 market prices and final polling averages.
 """
 
 import csv
@@ -57,8 +57,8 @@ races = [
         "inc": "Open",
         "inc_mult": 0.00,
         "pvi": "R+3",
-        "gop_20yr": 41.7,
-        "gop_20yr_ratio": "5/12",
+        "gop_20yr": 54.5,
+        "gop_20yr_ratio": "6/11",
         "t14_d": 95.0, "t14_r": 5.0,
         "t7_d": 96.0, "t7_r": 4.0,
         "poll_d": 50.8, "poll_r": 40.5,
@@ -73,8 +73,8 @@ races = [
         "inc": "Elected R",
         "inc_mult": 1.00,
         "pvi": "D+2",
-        "gop_20yr": 45.5,
-        "gop_20yr_ratio": "5/11",
+        "gop_20yr": 50.0,
+        "gop_20yr_ratio": "6/12",
         "t14_d": 66.0, "t14_r": 34.0,
         "t7_d": 61.0, "t7_r": 39.0,
         "poll_d": 49.1, "poll_r": 47.0,
@@ -138,7 +138,7 @@ races = [
         "inc_mult": 0.00,
         "pvi": "R+5",
         "gop_20yr": 100.0,
-        "gop_20yr_ratio": "11/11",
+        "gop_20yr_ratio": "12/12",
         "t14_d": 67.0, "t14_r": 33.0,
         "t7_d": 66.0, "t7_r": 34.0,
         "poll_d": 48.6, "poll_r": 46.1,
@@ -153,8 +153,8 @@ races = [
         "inc": "Open",
         "inc_mult": 0.00,
         "pvi": "R+6",
-        "gop_20yr": 72.7,
-        "gop_20yr_ratio": "8/11",
+        "gop_20yr": 81.8,
+        "gop_20yr_ratio": "9/11",
         "t14_d": 41.0, "t14_r": 59.0,
         "t7_d": 42.0, "t7_r": 58.0,
         "poll_d": 46.0, "poll_r": 45.8,
@@ -185,8 +185,8 @@ races = [
         "inc": "Elected R",
         "inc_mult": 1.00,
         "pvi": "R+13",
-        "gop_20yr": 100.0,
-        "gop_20yr_ratio": "12/12",
+        "gop_20yr": 92.3,
+        "gop_20yr_ratio": "12/13",
         "t14_d": 26.0, "t14_r": 74.0,
         "t7_d": 29.0, "t7_r": 71.0,
         "poll_d": 46.1, "poll_r": 46.4,
@@ -217,8 +217,8 @@ races = [
         "inc": "Elected R",
         "inc_mult": 1.00,
         "pvi": "R+1",
-        "gop_20yr": 45.5,
-        "gop_20yr_ratio": "5/11",
+        "gop_20yr": 50.0,
+        "gop_20yr_ratio": "6/12",
         "t14_d": 66.0, "t14_r": 34.0,
         "t7_d": 76.0, "t7_r": 24.0,
         "poll_d": 44.4, "poll_r": 44.4,
@@ -234,7 +234,7 @@ races = [
         "inc_mult": 1.00,
         "pvi": "R+5",
         "gop_20yr": 100.0,
-        "gop_20yr_ratio": "11/11",
+        "gop_20yr_ratio": "12/12",
         "t14_d": 36.0, "t14_r": 64.0,
         "t7_d": 34.0, "t7_r": 66.0,
         "poll_d": 46.4, "poll_r": 48.7,
@@ -298,7 +298,7 @@ for r in races:
     t1_simple_d = round(inv_logit_pct(logit(r["t1_d"]) + LOGIT_MIDTERM_SHIFT), 1)
 
     # 2. Locked T-14 and T-7 Preferred Poll-Conditioned Log-Odds Forecasts
-    net_pp_shift = max(0.0, 17.32 - total_credit)
+    net_pp_shift = max(0.0, 17.34 - total_credit)
     markup_weight = 1.0 if markup_r >= 0.0 else max(0.25, 1.0 + (markup_r / 35.0))
     logit_shift_d = (net_pp_shift / 24.5) * markup_weight
 
@@ -404,7 +404,7 @@ for dist, rd, inc_m, gop_h in house_t1_comp36:
     sd = round(inv_logit_pct(logit(rd) + LOGIT_MIDTERM_SHIFT), 1)
     r_ex = max(0.0, gop_h - 35.0)
     cred = REDNESS_SLOPE * r_ex + INCUMBENCY_BASE * inc_m + INTERACTION_SLOPE * r_ex * inc_m
-    pd = round(inv_logit_pct(logit(rd) + max(0.0, 17.32 - cred) / 24.5), 1)
+    pd = round(inv_logit_pct(logit(rd) + max(0.0, 17.34 - cred) / 24.5), 1)
     if rd >= 55.0:
         h_raw_d += 1
     elif rd <= 45.0:
@@ -431,9 +431,10 @@ gov_races = [r for r in races if r["chamber"] == "Gov"]
 print("=== 2026 BATTLEGROUND FORECASTS THROUGH T-1 (NOV 2, 2026) ===")
 for r in races:
     print(
-        f"{r['race']:23s} | T7 Raw={r['t7_d']:4.1f}%D -> T1 Raw={r['t1_d']:4.1f}%D ({r['t7_to_t1_shift_r']:+5.1f}pp R) | "
+        f"{r['race']:23s} | 20yr={r['gop_20yr']:5.1f}% ({r['gop_20yr_ratio']}) | Cred={r['redness_alone_credit']:.2f}+{r['incumbency_alone_credit']:.2f}+{r['interaction_credit']:.2f}={r['total_gop_credit']:5.2f}pp | "
+        f"T14 Pref={r['t14_pref_d']:4.1f}%D | T7 Pref={r['t7_pref_d']:4.1f}%D ({r['t7_rating']}) | "
         f"T1 PollWin={r['t1_poll_win_r']:4.1f}%R (Mkp={r['t1_trader_markup_r']:+5.1f}pp) | "
-        f"T7 Pref={r['t7_pref_d']:4.1f}%D | T1 Simp={r['t1_simple_d']:4.1f}%D | T1 Pref={r['t1_pref_d']:4.1f}%D/{r['t1_pref_r']:4.1f}%R ({r['t1_rating']})"
+        f"T1 Simp={r['t1_simple_d']:4.1f}%D | T1 Pref={r['t1_pref_d']:4.1f}%D/{r['t1_pref_r']:4.1f}%R ({r['t1_rating']})"
     )
 
 print(f"\nMean T-7 vs T-1 Trader Markup (All 9 Senate):     {mean(r['t7_trader_markup_r'] for r in senate_races):+.2f} pp -> {mean(r['t1_trader_markup_r'] for r in senate_races):+.2f} pp")
@@ -444,6 +445,8 @@ print(f"Vol-Weighted GOP Shift T-14 -> T-7 (13 BGs):      {sum(r['t14_to_t7_shif
 print(f"Vol-Weighted GOP Shift T-7  -> T-1 (13 BGs):      {sum(r['t7_to_t1_shift_r'] * r['t1_vol_m'] for r in races) / sum(r['t1_vol_m'] for r in races):+.2f} pp")
 print(f"Vol-Weighted GOP Shift T-14 -> T-1 (13 BGs):      {sum(r['t14_to_t1_shift_r'] * r['t1_vol_m'] for r in races) / sum(r['t1_vol_m'] for r in races):+.2f} pp")
 print(f"House T-1 (435 seats): Raw={h_raw_d}D-{h_raw_r}R ({h_raw_tu} TU) | Simple={h_sim_d}D-{h_sim_r}R ({h_sim_tu} TU) | Preferred={h_prf_d}D-{h_prf_r}R ({h_prf_tu} TU)")
+
+rmap = {r["race"]: r for r in races}
 
 summary = {
     "snapshot_date": "2026-11-02 (T-1, with locked T-14 and 2026-10-27 T-7 snapshots)",
@@ -498,10 +501,10 @@ summary = {
             "t14_preferred": "53 D - 46 R (1 Toss-Up: KS)",
             "t7_raw": "52 D - 48 R (0 Toss-Ups)",
             "t7_simple_debiased": "54 D - 45 R (1 Toss-Up: NE)",
-            "t7_preferred": "53 D - 46 R, 1 Toss-Up (IA Lean D at 57.8% D; KS uncalled Toss-Up at 49.1% D / 50.9% R)",
+            "t7_preferred": f"53 D - 46 R, 1 Toss-Up (IA Lean D at {rmap['IA Senate (Open)']['t7_pref_d']:.1f}% D; KS uncalled Toss-Up at {rmap['KS Senate (Marshall*)']['t7_pref_d']:.1f}% D / {rmap['KS Senate (Marshall*)']['t7_pref_r']:.1f}% R)",
             "t1_raw": "53 D - 46 R, 1 Toss-Up (KS flips to 62.0% D; IA moves to 50.0% D / 50.0% R Toss-Up)",
             "t1_simple_debiased": "54 D - 46 R (0 Toss-Ups)",
-            "t1_preferred": "54 D - 46 R, 0 Toss-Ups (IA Lean D at 64.5% D; KS Likely D at 69.4% D; NE Likely R at 66.9% R)",
+            "t1_preferred": f"54 D - 46 R, 0 Toss-Ups (IA Lean D at {rmap['IA Senate (Open)']['t1_pref_d']:.1f}% D; KS Likely D at {rmap['KS Senate (Marshall*)']['t1_pref_d']:.1f}% D; NE Likely R at {rmap['NE Senate (Ricketts*)']['t1_pref_r']:.1f}% R)",
         },
         "governors": {
             "t14_raw": "29 D - 21 R (0 Toss-Ups)",
@@ -509,10 +512,10 @@ summary = {
             "t14_preferred": "29 D - 21 R (0 Toss-Ups)",
             "t7_raw": "29 D - 21 R (0 Toss-Ups)",
             "t7_simple_debiased": "29 D - 20 R (1 Toss-Up: TX)",
-            "t7_preferred": "29 D - 21 R, 0 Toss-Ups (TX Lean R at 61.0% R; VT Likely R at 69.4% R)",
+            "t7_preferred": f"29 D - 21 R, 0 Toss-Ups (TX Lean R at {rmap['TX Gov (Abbott*)']['t7_pref_r']:.1f}% R; VT Likely R at {rmap['VT Gov (P. Scott*)']['t7_pref_r']:.1f}% R)",
             "t1_raw": "29 D - 21 R (0 Toss-Ups)",
             "t1_simple_debiased": "30 D - 19 R (1 Toss-Up: VT; TX flips to 56.3% D)",
-            "t1_preferred": "29 D - 21 R, 0 Toss-Ups (TX Lean R at 56.7% R; VT Lean R at 58.5% R)",
+            "t1_preferred": f"29 D - 21 R, 0 Toss-Ups (TX Lean R at {rmap['TX Gov (Abbott*)']['t1_pref_r']:.1f}% R; VT Lean R at {rmap['VT Gov (P. Scott*)']['t1_pref_r']:.1f}% R)",
         },
         "house": {
             "t14_raw": "229 D - 195 R (11 Toss-Ups)",
@@ -529,10 +532,10 @@ summary = {
     "battlegrounds": races,
 }
 
-with open("/home/antigravity/midterm_2026_t7_results.json", "w") as f:
+with open("midterm_2026_t7_results.json", "w") as f:
     json.dump(summary, f, indent=2)
 
-with open("/home/antigravity/midterm_2026_battlegrounds.csv", "w", newline="") as f:
+with open("midterm_2026_battlegrounds.csv", "w", newline="") as f:
     writer = csv.DictWriter(f, fieldnames=list(races[0].keys()))
     writer.writeheader()
     writer.writerows(races)
