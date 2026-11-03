@@ -130,6 +130,8 @@ Significance levels across all tables: `* p < 0.05`, `** p < 0.01`, `*** p < 0.0
 | **NV Gov (Lombardo\*)** | 66% D / 34% R | 76% D / 24% R | **75.5% D / 24.5% R** | +0.5 pp R | 43.7%–43.7% | 50.0% R | −26.0 → **−25.5 pp** |
 | **TX Gov (Abbott\*)** | 36% D / 64% R | 34% D / 66% R | **39% D / 61% R** | **−5.0 pp R** | 47.3%–49.8% | 67.5% R | −0.2 → **−6.5 pp** |
 | **VT Gov (P. Scott\*)** | 26% D / 74% R | 23% D / 77% R | **31% D / 69% R** | **−8.0 pp R** | 45.0%–44.8% | 48.5% R | −5.3 → **+20.5 pp** |
+| **FL Gov (Open, Jolly–Donalds)** | 28% D / 72% R | 30% D / 70% R | **34.5% D / 65.5% R** | **−4.5 pp R** | 44.3%–48.3% | 76.6% R | −9.3 → **−11.1 pp** |
+| **KS Gov (Open, Holscher–Masterson)** | 25% D / 75% R | 23% D / 77% R | **30% D / 70% R** | **−7.0 pp R** | 47.0%–48.8% | 62.8% R | −1.8 → **+7.2 pp** |
 
 ---
 
@@ -139,7 +141,7 @@ Significance levels across all tables: `* p < 0.05`, `** p < 0.01`, `*** p < 0.0
 | Chamber (Majority) | Not Up (D/R) | Raw Market (T−14 → T−7 → T−1) | Simple Log-Odds (T−14 → T−7 → T−1) | Preferred (T−14) | Preferred (T−7, Oct 27) | Final Preferred Log-Odds Forecast (T−1, Nov 2) |
 | :-- | :--: | :--: | :--: | :--: | :--: | :--: |
 | **U.S. Senate (51)** | **34 D / 31 R** | 52–48 → 52–48 → **53 D–46 R** (1 TU: IA) | 54–46 → 54–45 (1 TU) → **54 D–46 R** (0 TU) | 53 D–46 R (1 TU: KS) | 53 D–46 R (1 TU: KS) | **54 D–46 R, 0 Toss-Ups** (IA Lean D 64.2%; KS Likely D 69.4%; NE Likely R 66.2%) |
-| **Governors (26)** | **6 D / 8 R** | 29–21 → 29–21 → **29 D–21 R** (0 TU) | 29–20 (1 TU) → 29–20 (1 TU) → **30 D–19 R** (1 TU: VT) | 29 D–21 R (0 TU) | 29 D–21 R (0 TU) | **29 D–21 R, 0 Toss-Ups** (TX Lean R 56.7%; VT Lean R 58.5%) |
+| **Governors (26)** | **6 D / 8 R** | 28–22 → 28–22 → **28 D–22 R** (0 TU) | 28–21 (1 TU) → 28–20 (2 TU) → **29 D–18 R** (3 TU: VT, FL, KS) | 28 D–22 R (0 TU) | 28 D–22 R (0 TU) | **28 D–22 R, 0 Toss-Ups** (TX 56.7% R; VT 58.5% R; FL 55.4% R; KS 55.2% R) |
 | **U.S. House (218)** | All 435 Up | 229–195 (11 TU) → 234–192 (9 TU) → **237 D–194 R** (4 TU) | 251–174 → 254–172 → **250 D–172 R** (13 TU) | 241 D–185 R (9 TU) | 244 D–183 R (8 TU) | **243 D–181 R, 11 Toss-Ups** (+6 called D, −13 called R vs. T−1 raw) |
 
 ---
@@ -147,18 +149,20 @@ Significance levels across all tables: `* p < 0.05`, `** p < 0.01`, `*** p < 0.0
 <a id="table-s9"></a>
 ### Table S9: Complete Race-by-Race 2026 Battleground Win-Probability Predictions Across T−14, October 27 (T−7), and November 2 (T−1)
 
-| 2026 Battleground Race | Inc & Certified 2006–25 R (PVI) | GOP Credit (Red+Inc+Int) | Preferred (T−14) | Raw → Preferred (T−7) | Raw Market (T−1, Nov 2) | Simple Log-Odds (T−1) | Preferred Log-Odds Forecast & Call (T−1, Nov 2) |
+| 2026 Battleground Race | Inc & Certified 2006–25 R (2025 PVI) | GOP Credit (Red+Inc+Int) | Preferred (T−14) | Raw → Preferred (T−7) | Raw Market (T−1, Nov 2) | Simple Log-Odds (T−1) | Preferred Log-Odds Forecast & Call (T−1, Nov 2) |
 | :-- | :--: | :--: | :--: | :--: | :--: | :--: | :--: |
-| **NC Senate (Open)** | Open, 54.5% [6/11] (R+3) | +0.88+0.00+0.00 = **+0.88** | 97.4% D (Safe D) | 96.0% → **97.9% D** (Safe D) | 98.0% D / 2.0% R (Safe D) | 99.0% D (Safe D) | **99.0% D / 1.0% R — Safe / Solid D** |
-| **ME Senate (Collins\*)** | Elected R, 50.0% [6/12] (D+2) | +0.67+5.50+0.82 = **+6.99** | 74.8% D (Likely D) | 61.0% → **70.5% D** (Likely D) | 72.5% D / 27.5% R (Likely D) | 84.1% D (Likely D) | **80.1% D / 19.9% R — Likely D** |
-| **MI Senate (Open)** | Open, 16.7% [2/12] (R+1) | +0.00+0.00+0.00 = **+0.00** | 81.9% D (Likely D) | 68.0% → **81.2% D** (Likely D) | 78.5% D / 21.5% R (Likely D) | 88.0% D (Safe D) | **88.1% D / 11.9% R — Safe / Solid D** |
-| **OH Senate (Husted\*)** | Appt. R, 66.7% [8/12] (R+6) | +1.43+2.48+0.78 = **+4.69** | 79.6% D (Likely D) | 67.5% → **77.7% D** (Likely D) | 70.5% D / 29.5% R (Likely D) | 82.8% D (Likely D) | **79.8% D / 20.2% R — Likely D** |
+| **NC Senate (Open)** | Open, 54.5% [6/11] (R+1) | +0.88+0.00+0.00 = **+0.88** | 97.4% D (Safe D) | 96.0% → **97.9% D** (Safe D) | 98.0% D / 2.0% R (Safe D) | 99.0% D (Safe D) | **99.0% D / 1.0% R — Safe / Solid D** |
+| **ME Senate (Collins\*)** | Elected R, 50.0% [6/12] (D+4) | +0.67+5.50+0.82 = **+6.99** | 74.8% D (Likely D) | 61.0% → **70.5% D** (Likely D) | 72.5% D / 27.5% R (Likely D) | 84.1% D (Likely D) | **80.1% D / 19.9% R — Likely D** |
+| **MI Senate (Open)** | Open, 16.7% [2/12] (EVEN) | +0.00+0.00+0.00 = **+0.00** | 81.9% D (Likely D) | 68.0% → **81.2% D** (Likely D) | 78.5% D / 21.5% R (Likely D) | 88.0% D (Safe D) | **88.1% D / 11.9% R — Safe / Solid D** |
+| **OH Senate (Husted\*)** | Appt. R, 66.7% [8/12] (R+5) | +1.43+2.48+0.78 = **+4.69** | 79.6% D (Likely D) | 67.5% → **77.7% D** (Likely D) | 70.5% D / 29.5% R (Likely D) | 82.8% D (Likely D) | **79.8% D / 20.2% R — Likely D** |
 | **AK Senate (Sullivan\*)** | Elected R, 81.8% [9/11] (R+6) | +2.11+5.50+2.57 = **+10.18** | 79.4% D (Likely D) | 74.0% → **78.5% D** (Likely D) | 72.0% D / 28.0% R (Likely D) | 83.8% D (Likely D) | **75.7% D / 24.3% R — Likely D** |
-| **TX Senate (Open)** | Open, 100.0% [12/12] (R+5) | +2.92+0.00+0.00 = **+2.92** | 78.5% D (Likely D) | 66.0% → **77.8% D** (Likely D) | 75.5% D / 24.5% R (Likely D) | 86.1% D (Safe D) | **82.9% D / 17.1% R — Likely D** |
+| **TX Senate (Open)** | Open, 100.0% [12/12] (R+6) | +2.92+0.00+0.00 = **+2.92** | 78.5% D (Likely D) | 66.0% → **77.8% D** (Likely D) | 75.5% D / 24.5% R (Likely D) | 86.1% D (Safe D) | **82.9% D / 17.1% R — Likely D** |
 | **IA Senate (Open)** | Open, 81.8% [9/11] (R+6) | +2.11+0.00+0.00 = **+2.11** | 56.4% D (Lean D) | 42.0% → **57.4% D** (Lean D) | 50.0% D / 50.0% R (Toss-Up) | 66.8% D (Likely D) | **64.2% D / 35.8% R — Lean D** |
-| **KS Senate (Marshall\*)** | Elected R, 72.7% [8/11] (R+10) | +1.70+5.50+2.07 = **+9.27** | 46.0% D (Toss-Up) | 41.0% → **49.1% D** (Toss-Up) | 62.0% D / 38.0% R (Lean D) | 76.7% D (Likely D) | **69.4% D / 30.6% R — Likely D** |
-| **NE Senate (Ricketts\*)** | Elected R, 92.3% [12/13] (R+13) | +2.58+5.50+3.15 = **+11.23** | 31.1% I (Likely R) | 29.0% → **34.4% I** (Likely R) | 28.5% I / 71.5% R (Likely R) | 44.5% I (Lean R) | **33.8% I / 66.2% R — Likely R** |
-| **GA Gov (Open)** | Open, 75.0% [9/12] (R+3) | +1.80+0.00+0.00 = **+1.80** | 69.3% D (Likely D) | 61.0% → **70.2% D** (Likely D) | 69.0% D / 31.0% R (Likely D) | 81.8% D (Likely D) | **72.3% D / 27.7% R — Likely D** |
+| **KS Senate (Marshall\*)** | Elected R, 72.7% [8/11] (R+8) | +1.70+5.50+2.07 = **+9.27** | 46.0% D (Toss-Up) | 41.0% → **49.1% D** (Toss-Up) | 62.0% D / 38.0% R (Lean D) | 76.7% D (Likely D) | **69.4% D / 30.6% R — Likely D** |
+| **NE Senate (Ricketts\*)** | Elected R, 92.3% [12/13] (R+10) | +2.58+5.50+3.15 = **+11.23** | 31.1% I (Likely R) | 29.0% → **34.4% I** (Likely R) | 28.5% I / 71.5% R (Likely R) | 44.5% I (Lean R) | **33.8% I / 66.2% R — Likely R** |
+| **GA Gov (Open)** | Open, 75.0% [9/12] (R+1) | +1.80+0.00+0.00 = **+1.80** | 69.3% D (Likely D) | 61.0% → **70.2% D** (Likely D) | 69.0% D / 31.0% R (Likely D) | 81.8% D (Likely D) | **72.3% D / 27.7% R — Likely D** |
 | **NV Gov (Lombardo\*)** | Elected R, 50.0% [6/12] (R+1) | +0.67+5.50+0.82 = **+6.99** | 68.4% D (Likely D) | 76.0% → **77.9% D** (Likely D) | 75.5% D / 24.5% R (Likely D) | 86.1% D (Safe D) | **77.6% D / 22.4% R — Likely D** |
-| **TX Gov (Abbott\*)** | Elected R, 100.0% [12/12] (R+5) | +2.92+5.50+3.58 = **+12.00** | 41.1% D (Lean R) | 34.0% → **39.0% D** (Lean R) | 39.0% D / 61.0% R (Lean R) | 56.3% D (Lean D) | **43.3% D / 56.7% R — Lean R** |
+| **TX Gov (Abbott\*)** | Elected R, 100.0% [12/12] (R+6) | +2.92+5.50+3.58 = **+12.00** | 41.1% D (Lean R) | 34.0% → **39.0% D** (Lean R) | 39.0% D / 61.0% R (Lean R) | 56.3% D (Lean D) | **43.3% D / 56.7% R — Lean R** |
 | **VT Gov (P. Scott\*)** | Elected R, 41.2% [7/17] (D+17) | +0.28+5.50+0.34 = **+6.12** | 34.1% D (Likely R) | 23.0% → **30.6% D** (Likely R) | 31.0% D / 69.0% R (Likely R) | 47.5% D (Toss-Up) | **41.5% D / 58.5% R — Lean R** |
+| **FL Gov (Open)** | Open, 83.3% [10/12] (R+5) | +2.17+0.00+0.00 = **+2.17** | 38.0% D (Lean R) | 30.0% → **40.3% D** (Lean R) | 34.5% D / 65.5% R (Likely R) | 51.5% D (Toss-Up) | **44.6% D / 55.4% R — Lean R** |
+| **KS Gov (Open)** | Open, 72.7% [8/11] (R+8) | +1.70+0.00+0.00 = **+1.70** | 37.9% D (Lean R) | 23.0% → **35.4% D** (Lean R) | 30.0% D / 70.0% R (Likely R) | 46.3% D (Toss-Up) | **44.8% D / 55.2% R — Lean R** |
