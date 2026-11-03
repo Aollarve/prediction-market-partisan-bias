@@ -3,10 +3,11 @@
 **Author:** Andres Ollarvez
 
 > [!IMPORTANT]
-> **Read the Full Working Paper:**  
-> **[Partisan Pricing Bias in U.S. Political Prediction Markets: Empirical Evidence Across 455 Elections (2012–2026)](./partisan_pricing_bias_in_us_political_prediction_markets.md)**
+> **Working Papers in This Repository:**  
+> - **Empirical Study (2012–2026):** **[Partisan Pricing Bias in U.S. Political Prediction Markets: Empirical Evidence Across 455 Elections (2012–2026)](./partisan_pricing_bias_in_us_political_prediction_markets.md)**  
+> - **2026 Pre-Election Forecasts (Locked Through T−1):** **[Applying Prediction Market De-Biasing to the 2026 U.S. Midterms: Poll-Conditioned Log-Odds Forecasts Through T−1 for the Senate, Governors, and House](./applying_prediction_market_debiasing_2026_midterms.md)**
 >
-> **Quick Links:** [Full Paper](./partisan_pricing_bias_in_us_political_prediction_markets.md) · [Supplemental Statistical Tables (S1–S9)](./supplemental_tables.md) · [455-Election Dataset (CSV)](./verified_election_markets_2012_2026.csv) · [Replication Script (`replicate_paper_tables.py`)](./replicate_paper_tables.py)
+> **Quick Links:** [Empirical Study](./partisan_pricing_bias_in_us_political_prediction_markets.md) · [2026 Midterm Forecasts](./applying_prediction_market_debiasing_2026_midterms.md) · [Supplemental Tables (S1–S9)](./supplemental_tables.md) · [455-Election Dataset (CSV)](./verified_election_markets_2012_2026.csv) · [2026 Battlegrounds (CSV)](./midterm_2026_battlegrounds.csv) · [Replication Script (`replicate_paper_tables.py`)](./replicate_paper_tables.py)
 
 ---
 
@@ -28,7 +29,7 @@ Prediction markets such as Kalshi, Polymarket, and PredictIt are widely cited al
 | **Modern Specials & Off-Year (2017–2026)** | 50 (34) | +7.58 pp (NS) | **+5.14 pp\*\*\*** | **21.4% vs. 9.1%** | 0.1377 vs. **0.1189** |
 | **All Modern Non-Presidential** | **225 (37)** | **+17.34 pp\*\*\*** | **+5.85 pp\*\*\*** | **46.2% vs. 7.3%** | 0.1720 vs. **0.1412** |
 
-**[Read the full working paper →](./partisan_pricing_bias_in_us_political_prediction_markets.md)**
+**[Read the full empirical study →](./partisan_pricing_bias_in_us_political_prediction_markets.md)** · **[Read the locked 2026 midterm forecasts →](./applying_prediction_market_debiasing_2026_midterms.md)**
 
 ---
 
@@ -37,10 +38,11 @@ Prediction markets such as Kalshi, Polymarket, and PredictIt are widely cited al
 | File | Description |
 | :--- | :--- |
 | [`partisan_pricing_bias_in_us_political_prediction_markets.md`](./partisan_pricing_bias_in_us_political_prediction_markets.md) | **Working Paper:** *Partisan Pricing Bias in U.S. Political Prediction Markets: Empirical Evidence Across 455 Elections (2012–2026)* — full empirical study, methodology, tables, limitations, disclosures, and references. |
+| [`applying_prediction_market_debiasing_2026_midterms.md`](./applying_prediction_market_debiasing_2026_midterms.md) | **Working Paper (Locked Pre-Election Forecasts):** *Applying Prediction Market De-Biasing to the 2026 U.S. Midterms: Poll-Conditioned Log-Odds Forecasts Through T−1 for the Senate, Governors, and House* — pre-election T−14, T−7, and T−1 forecasts across 15 statewide battlegrounds and all three major races. |
 | [`supplemental_tables.md`](./supplemental_tables.md) | **Supplemental Statistical Tables (Tables S1–S9):** Complete, unabbreviated multi-column statistical reference tables (with date counts *G*, date-clustered and race-level exact Student-*t* *p*-values, raw `k/n` fractions, Brier scores, the full 3×3 State Redness × Incumbency matrix, and locked 2026 pre-election trajectories). |
 | [`verified_election_markets_2012_2026.csv`](./verified_election_markets_2012_2026.csv) | **Historical Dataset (*N* = 455):** Race-by-race dataset of 455 unique, named U.S. general, runoff, recall, and special elections (2012–April 2026) across 28 verified columns (*G* = 51 distinct election dates). |
 | [`replicate_paper_tables.py`](./replicate_paper_tables.py) | **Primary Replication Script:** Zero-dependency Python script that reads `verified_election_markets_2012_2026.csv` and `midterm_2026_t7_results.json` directly from disk and reproduces every table, exact Student-*t* *p*-value, decomposition, Brier calibration score, and price-controlled wrong-call regression. |
-| [`midterm_2026_battlegrounds.csv`](./midterm_2026_battlegrounds.csv) | **2026 Pre-Election Battleground Snapshot (*N* = 13):** Locked pre-election dataset of the 13 core 2026 U.S. Senate and Governor battlegrounds across 48 columns (T−14, October 27 T−7, and November 2 T−1 market odds, consensus polling averages, trader markups, structural credits, and log-odds de-biased probabilities). |
+| [`midterm_2026_battlegrounds.csv`](./midterm_2026_battlegrounds.csv) | **2026 Pre-Election Battleground Snapshot (*N* = 15):** Locked pre-election dataset of the 15 competitive 2026 U.S. Senate (9) and Governor (6) battlegrounds across 48 columns (T−14, October 27 T−7, and November 2 T−1 market odds, consensus polling averages, trader markups, structural credits, and log-odds de-biased probabilities). |
 | [`midterm_2026_t7_results.json`](./midterm_2026_t7_results.json) | **2026 Pre-Election JSON Archive:** Complete JSON archive of the locked 2026 T−14, T−7, and T−1 battleground and chamber-wide projections (Senate, Governors, and U.S. House) recorded ahead of November 3, 2026. |
 | [`run_t7_analysis.py`](./run_t7_analysis.py) | **2026 Pre-Election Forecast Script:** Zero-dependency Python script reproducing the 2026 T−14, T−7, and T−1 poll-conditioned log-odds de-biasing calculations and regenerating `midterm_2026_t7_results.json` and `midterm_2026_battlegrounds.csv`. |
 
@@ -106,7 +108,7 @@ Every row (*N* = 455) is uniquely identified by `(election_date, office, state_o
 
 ## 4. 2026 Midterm Pre-Election Battlegrounds Codebook (`midterm_2026_battlegrounds.csv`)
 
-Contains the 13 high-liquidity 2026 U.S. Senate (9) and Governor (4) battleground contracts tracked pre-election across Kalshi and Polymarket (\$240.5M direct volume at T−1, recorded ahead of November 3, 2026):
+Contains the 15 competitive 2026 U.S. Senate (9) and Governor (6) battleground contracts tracked pre-election across Kalshi and Polymarket (\$255.5M direct volume at T−1, recorded ahead of November 3, 2026):
 
 - **Structural & Baseline Fields:** `race`, `chamber`, `inc` (`Open`, `Appt. R`, `Elected R`), `inc_mult`, `pvi`, `gop_20yr`, `gop_20yr_ratio`, `redness_alone_credit`, `incumbency_alone_credit`, `interaction_credit`, `total_gop_credit`.
 - **T−14 Snapshot (Oct 20, 2026):** `t14_d`, `t14_r`, `t14_simple_d`, `t14_pref_d`, `t14_pref_r`, `t14_rating`.
@@ -121,6 +123,10 @@ Contains the 13 high-liquidity 2026 U.S. Senate (9) and Governor (4) battlegroun
 Ollarvez, A. (2026). Partisan Pricing Bias in U.S. Political Prediction Markets:
 Empirical Evidence Across 455 Elections (2012–2026). Independent Empirical Research
 Working Paper. https://github.com/Aollarve/prediction-market-partisan-bias
+
+Ollarvez, A. (2026). Applying Prediction Market De-Biasing to the 2026 U.S. Midterms:
+Poll-Conditioned Log-Odds Forecasts Through T−1 for the Senate, Governors, and House.
+Independent Empirical Research Working Paper. https://github.com/Aollarve/prediction-market-partisan-bias
 ```
 
 *Independent Research Disclaimer:* All research, code, and papers in this repository were produced independently by the author in a personal capacity and do not represent the views, positions, policies, or endorsements of any employer, parent or affiliated entity, or client. Nothing in this repository constitutes financial, investment, legal, or wagering advice.
